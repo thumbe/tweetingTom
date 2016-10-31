@@ -107,6 +107,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         TwitterClient.sInstance.handleLike(like: !(tweet.favorited), id: tweet.id!, success: { (tweet: Tweet?) in
             
             self.tweetsArray[(indexPath?.row)!].favorited = tweet!.favorited
+            self.tweetsArray[(indexPath?.row)!].favCount = tweet!.favCount
             self.tableView.reloadData();
         }) { (error: Error?) in
             print(error?.localizedDescription)
@@ -120,6 +121,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         TwitterClient.sInstance.handleRetweet(retweet: !(tweet.retweeted), id: tweet.id!, success: { (tweet: Tweet?) in
             
             self.tweetsArray[(indexPath?.row)!].retweeted = tweet!.retweeted;
+            self.tweetsArray[(indexPath?.row)!].retweetCount = tweet!.retweetCount;
             self.tableView.reloadData()
             
         }) { (error: Error?) in
