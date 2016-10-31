@@ -10,6 +10,8 @@ import UIKit
 
 @objc protocol TweetsTableViewCellDelegate {
     @objc optional func reply(tweet: Tweet?, cell: TweetsTableViewCell)
+    @objc optional func like(tweet: Tweet?, cell: TweetsTableViewCell)
+    @objc optional func retweet(tweet: Tweet?, cell: TweetsTableViewCell)
 }
 
 class TweetsTableViewCell: UITableViewCell {
@@ -48,17 +50,28 @@ class TweetsTableViewCell: UITableViewCell {
             let replyGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetsTableViewCell.replyTapped(sender:)))
             replyIcon.isUserInteractionEnabled = true
             replyIcon.addGestureRecognizer(replyGestureRecognizer)
+            
+            let likeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetsTableViewCell.likeTapped(sender:)))
+            likeIcon.isUserInteractionEnabled = true
+            likeIcon.addGestureRecognizer(likeGestureRecognizer)
+            
+            let retweetGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetsTableViewCell.retweetTapped(sender:)))
+            retweetIcon.isUserInteractionEnabled = true
+            retweetIcon.addGestureRecognizer(retweetGestureRecognizer)
+            
         }
     }
     
-    func replyTapped(sender: Any?){
+    func replyTapped(sender: Any?) {
         delegate?.reply!(tweet: tweet, cell: self)
-        
-//            let vc = storyboard?.instantiateViewControllerWithIdentifier("TweetComposeViewController") as! TweetComposeViewController!
-//            navigationController?.pushViewController(vc, animated: true)
-//            vc.tweetReplyId = tweet.id
-//            vc.tweetReplyUsername = tweet.user!.screenName
-        
+    }
+    
+    func likeTapped(sender: Any?) {
+        delegate?.like!(tweet: tweet, cell: self)
+    }
+    
+    func retweetTapped(sender: Any?) {
+        delegate?.retweet!(tweet: tweet, cell: self)
     }
     
     override func awakeFromNib() {

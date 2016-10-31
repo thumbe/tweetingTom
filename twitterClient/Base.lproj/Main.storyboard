@@ -143,7 +143,14 @@
                             <constraint firstItem="cMz-Qo-GOD" firstAttribute="leading" secondItem="TqA-H5-a2p" secondAttribute="leading" id="hzu-C6-USG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="DZo-FS-83z"/>
+                    <navigationItem key="navigationItem" title="Home" id="DZo-FS-83z">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="atU-cr-luO"/>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="gvY-BL-G6t">
+                            <connections>
+                                <action selector="newTweetAction:" destination="vsz-EZ-4EG" id="dIC-p0-bcy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="cMz-Qo-GOD" id="wMg-JP-9uG"/>
                     </connections>
@@ -202,7 +209,13 @@
                             <constraint firstAttribute="trailing" secondItem="GkC-Da-OCG" secondAttribute="trailing" constant="16" id="wPz-51-lCg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="wNo-LZ-QLa"/>
+                    <navigationItem key="navigationItem" id="wNo-LZ-QLa">
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="G7i-LS-NQB">
+                            <connections>
+                                <action selector="sendTweetAction:" destination="LeK-AT-2sd" id="bX3-fz-7ww"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="profileImage" destination="euA-m3-7D5" id="w5R-EN-BZG"/>
                         <outlet property="textArea" destination="GkC-Da-OCG" id="cMD-oG-tWC"/>
@@ -362,6 +375,7 @@
                         <outlet property="favoriteCount" destination="WeL-6J-FM1" id="akv-5O-gTp"/>
                         <outlet property="likeIcon" destination="8Px-0Z-zLj" id="i02-2G-nWP"/>
                         <outlet property="profileImage" destination="vgM-4m-Qek" id="Pjd-6r-eLS"/>
+                        <outlet property="replyIcon" destination="Doz-Ft-MgV" id="muy-ph-KpB"/>
                         <outlet property="retweetCountLabel" destination="gz1-vx-jRq" id="QGg-aF-hxc"/>
                         <outlet property="retweetIcon" destination="PHV-xT-XLF" id="R1X-M7-Z4C"/>
                         <outlet property="tweetLabel" destination="buX-Gw-lOy" id="El5-4J-xlY"/>
@@ -376,7 +390,7 @@
         <!--Navigation Controller-->
         <scene sceneID="NT7-La-acP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9ua-0a-Or5" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="tweetsNavigationController.identifier" automaticallyAdjustsScrollViewInsets="NO" id="9ua-0a-Or5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IjL-xD-Hna">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

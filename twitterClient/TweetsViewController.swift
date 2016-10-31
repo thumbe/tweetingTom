@@ -10,7 +10,7 @@ import UIKit
 import AFNetworking
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,
-    TweetsTableViewCellDelegate {
+    TweetsTableViewCellDelegate, ComposeViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
@@ -19,6 +19,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.navigationController?.navigationBar.barTintColor = UIColor.blue;
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -33,6 +34,19 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
 
+    @IBAction func newTweetAction(_ sender: AnyObject) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "composeViewController.identifier") as! ComposeViewController!
+        vc?.delegate = self;
+        navigationController?.pushViewController(vc!, animated: true)
+    }
+    
+    func onNewTweet(tweet: Tweet?, viewController: ComposeViewController) {
+        if tweet != nil {
+            tweetsArray.insert(tweet!, at: 0)
+            tableView.reloadData()
+        }
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -75,31 +89,43 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let vc = segue.destination as! TweetDetailViewController
-//        let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
-//        
-//        vc.tweet = tweetsArray[(indexPath?.row)!]
-//        tableView.deselectRow(at: indexPath!, animated: true)
-//    }
-    
     func reply(tweet: Tweet?, cell: TweetsTableViewCell) {
         let indexPath = tableView.indexPath(for: cell)
         print("Reply to \(tweetsArray[(indexPath?.row)!].text)")
      
         let vc = storyboard?.instantiateViewController(withIdentifier: "composeViewController.identifier") as! ComposeViewController!
-        
+        vc?.delegate = self
+        vc?.replyTo = tweetsArray[(indexPath?.row)!].user?.screenName
+        vc?.replyToId = tweetsArray[(indexPath?.row)!].id
         navigationController?.pushViewController(vc!, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func like(tweet: Tweet?, cell: TweetsTableViewCell) {
+        let indexPath = tableView.indexPath(for: cell)
+        let tweet = tweetsArray[(indexPath?.row)!];
+        
+        TwitterClient.sInstance.handleLike(like: !(tweet.favorited), id: tweet.id!, success: { (tweet: Tweet?) in
+            
+            self.tweetsArray[(indexPath?.row)!].favorited = tweet!.favorited
+            self.tableView.reloadData();
+        }) { (error: Error?) in
+            print(error?.localizedDescription)
+        }
     }
-    */
+    
+    func retweet(tweet: Tweet?, cell: TweetsTableViewCell) {
+        let indexPath = tableView.indexPath(for: cell)
+        let tweet = tweetsArray[(indexPath?.row)!];
+        
+        TwitterClient.sInstance.handleRetweet(retweet: !(tweet.retweeted), id: tweet.id!, success: { (tweet: Tweet?) in
+            
+            self.tweetsArray[(indexPath?.row)!].retweeted = tweet!.retweeted;
+            self.tableView.reloadData()
+            
+        }) { (error: Error?) in
+            print(error?.localizedDescription)
+        }
+    }
+
 
 }
