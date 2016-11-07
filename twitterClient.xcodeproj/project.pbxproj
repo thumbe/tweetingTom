@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		036E2CE41DCF104B006A90E8 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E2CE31DCF104B006A90E8 /* HamburgerViewController.swift */; };
+		036E2CE61DCF173C006A90E8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E2CE51DCF173C006A90E8 /* MenuViewController.swift */; };
+		036E2CE81DCFE951006A90E8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E2CE71DCFE951006A90E8 /* ProfileViewController.swift */; };
+		036E2CEA1DCFF61F006A90E8 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E2CE91DCFF61F006A90E8 /* ProfileTableViewCell.swift */; };
 		03FD402B1DC5D2FD0029BAA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD402A1DC5D2FD0029BAA1 /* AppDelegate.swift */; };
 		03FD402D1DC5D2FD0029BAA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD402C1DC5D2FD0029BAA1 /* ViewController.swift */; };
 		03FD40301DC5D2FD0029BAA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03FD402E1DC5D2FD0029BAA1 /* Main.storyboard */; };
@@ -45,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		036E2CE31DCF104B006A90E8 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		036E2CE51DCF173C006A90E8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		036E2CE71DCFE951006A90E8 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		036E2CE91DCFF61F006A90E8 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		03FD40271DC5D2FD0029BAA1 /* twitterClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitterClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03FD402A1DC5D2FD0029BAA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03FD402C1DC5D2FD0029BAA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +179,9 @@
 				03FD40621DC6929E0029BAA1 /* TweetsViewController.swift */,
 				03FD40691DC6BF050029BAA1 /* TweetDetailViewController.swift */,
 				03FD406B1DC6CD540029BAA1 /* ComposeViewController.swift */,
+				036E2CE31DCF104B006A90E8 /* HamburgerViewController.swift */,
+				036E2CE51DCF173C006A90E8 /* MenuViewController.swift */,
+				036E2CE71DCFE951006A90E8 /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -196,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				03FD40651DC696F80029BAA1 /* TweetsTableViewCell.swift */,
+				036E2CE91DCFF61F006A90E8 /* ProfileTableViewCell.swift */,
 			);
 			name = TableCell;
 			sourceTree = "<group>";
@@ -495,14 +507,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				03FD40611DC684CE0029BAA1 /* TwitterClient.swift in Sources */,
+				036E2CEA1DCFF61F006A90E8 /* ProfileTableViewCell.swift in Sources */,
 				03FD40661DC696F80029BAA1 /* TweetsTableViewCell.swift in Sources */,
 				03FD406A1DC6BF050029BAA1 /* TweetDetailViewController.swift in Sources */,
 				03FD405E1DC5E5640029BAA1 /* User.swift in Sources */,
 				03FD40631DC6929E0029BAA1 /* TweetsViewController.swift in Sources */,
 				03FD406C1DC6CD540029BAA1 /* ComposeViewController.swift in Sources */,
 				03FD405A1DC5D8630029BAA1 /* LoginViewController.swift in Sources */,
+				036E2CE61DCF173C006A90E8 /* MenuViewController.swift in Sources */,
 				03FD402D1DC5D2FD0029BAA1 /* ViewController.swift in Sources */,
 				03FD402B1DC5D2FD0029BAA1 /* AppDelegate.swift in Sources */,
+				036E2CE81DCFE951006A90E8 /* ProfileViewController.swift in Sources */,
+				036E2CE41DCF104B006A90E8 /* HamburgerViewController.swift in Sources */,
 				03FD40681DC6A32C0029BAA1 /* Tweet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

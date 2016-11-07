@@ -21,6 +21,7 @@ class User: NSObject {
     var tweetCount: String?
     var profileURLString: String?
     var jsonValue: NSDictionary?
+    var profileBackgroundImageURL: URL?
     
     init(dictionary: NSDictionary) {
         self.jsonValue = dictionary
@@ -36,6 +37,11 @@ class User: NSObject {
         }
         if let status_count = dictionary["statuses_count"]{
             tweetCount = "\(status_count)"
+        }
+        if let backgroundImageUrl = dictionary["profile_background_image_url_https"]{
+            if let backgroundImageUrl = backgroundImageUrl as? String {
+                profileBackgroundImageURL = URL(string: backgroundImageUrl)
+            }
         }
         
     }

@@ -16,6 +16,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var refreshControl: UIRefreshControl!
     
     var tweetsArray = [Tweet]()
+    var isMentions: Bool = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
         
-        getTweets()
-        
+        if (isMentions) {
+            getMentions()
+        } else {
+            getTweets()
+        }
         self.refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(TweetsViewController.getTweets), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshControl!, at: 0)
@@ -54,6 +58,21 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getTweets() {
         TwitterClient.sInstance.getTweets(success: { (tweets: [Tweet]?) in
+            
+            self.tweetsArray = tweets!;
+            self.tableView.reloadData()
+            
+            if let refreshControl = self.refreshControl {
+                refreshControl.endRefreshing()
+            }
+            
+        }) { (error: Error?) in
+            print(error?.localizedDescription)
+        }
+    }
+    
+    func getMentions() {
+        TwitterClient.sInstance.getMentions(success: { (tweets: [Tweet]?) in
             
             self.tweetsArray = tweets!;
             self.tableView.reloadData()
@@ -112,6 +131,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }) { (error: Error?) in
             print(error?.localizedDescription)
         }
+    }
+    
+    func userProfile(tweet: Tweet?, cell: TweetsTableViewCell) {
+        
+        let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "profileViewController.identifier") as! ProfileViewController
+        profileViewController.user = tweet?.user
+        self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     
     func retweet(tweet: Tweet?, cell: TweetsTableViewCell) {

@@ -17,10 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if User.currentUser != nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier:"tweetsNavigationController.identifier")
-            window?.rootViewController = vc
+                        //let vc = storyboard.instantiateViewController(withIdentifier:"tweetsNavigationController.identifier")
+            let hamburgerViewController = storyboard.instantiateViewController(withIdentifier: "hamburgerViewController.identifier") as! HamburgerViewController;
+            let menuViewController = storyboard.instantiateViewController(withIdentifier: "menuViewController.identifier") as! MenuViewController
+            
+            let menuNavController = UINavigationController(rootViewController: menuViewController)
+            
+            menuViewController.hamburgerViewController = hamburgerViewController;
+            
+            hamburgerViewController.menuViewController = menuNavController;
+            
+            
+            window?.rootViewController = hamburgerViewController
+        } else {
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "loginViewController.identifier")
+            window?.rootViewController = loginViewController
         }
         return true
     }

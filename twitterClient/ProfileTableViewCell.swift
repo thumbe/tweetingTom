@@ -8,26 +8,32 @@
 
 import UIKit
 
-@objc protocol TweetsTableViewCellDelegate {
-    @objc optional func reply(tweet: Tweet?, cell: TweetsTableViewCell)
-    @objc optional func like(tweet: Tweet?, cell: TweetsTableViewCell)
-    @objc optional func retweet(tweet: Tweet?, cell: TweetsTableViewCell)
-    @objc optional func userProfile(tweet: Tweet?, cell: TweetsTableViewCell)
+@objc protocol ProfileTableViewCellDelegate {
+    @objc optional func reply(tweet: Tweet?, cell: ProfileTableViewCell)
+    @objc optional func like(tweet: Tweet?, cell: ProfileTableViewCell)
+    @objc optional func retweet(tweet: Tweet?, cell: ProfileTableViewCell)
 }
 
-class TweetsTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var profileImageView: UIImageView!
+class ProfileTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var likeIcon: UIImageView!
+    @IBOutlet weak var replyIcon: UIImageView!
+    @IBOutlet weak var retweetIcon: UIImageView!
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var twitterHandleLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+//    @IBOutlet weak var profileImageView: UIImageView!
+//    
+//    @IBOutlet weak var tweetLabel: UILabel!
+//    @IBOutlet weak var twitterHandleLabel: UILabel!
+//    @IBOutlet weak var usernameLabel: UILabel!
+//    
+//    @IBOutlet weak var replyIcon: UIImageView!
+//    @IBOutlet weak var retweetIcon: UIImageView!
+//    @IBOutlet weak var likeIcon: UIImageView!
     
-    @IBOutlet weak var replyIcon: UIImageView!
-    @IBOutlet weak var retweetIcon: UIImageView!
-    @IBOutlet weak var likeIcon: UIImageView!
-    
-    weak var delegate: TweetsTableViewCellDelegate?
+    weak var delegate: ProfileTableViewCellDelegate?
     
     
     var tweet: Tweet! {
@@ -60,10 +66,6 @@ class TweetsTableViewCell: UITableViewCell {
             retweetIcon.isUserInteractionEnabled = true
             retweetIcon.addGestureRecognizer(retweetGestureRecognizer)
             
-            let profileImageGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetsTableViewCell.profileImageTapped(sender:)))
-            profileImageView.isUserInteractionEnabled = true
-            profileImageView.addGestureRecognizer(profileImageGestureRecognizer)
-            
         }
     }
     
@@ -79,20 +81,17 @@ class TweetsTableViewCell: UITableViewCell {
         delegate?.retweet!(tweet: tweet, cell: self)
     }
     
-    func profileImageTapped(sender: Any?) {
-        delegate?.userProfile?(tweet: tweet, cell: self)
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
+
